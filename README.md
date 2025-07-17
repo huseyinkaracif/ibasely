@@ -1,5 +1,4 @@
 # 🌟 IBASELY - Online Toolset
-
 > Güzel tasarımlı kullanışlı online araçlar seti
 
 [![PWA](https://img.shields.io/badge/PWA-Enabled-blue.svg)](https://web.dev/progressive-web-apps/)
@@ -13,63 +12,6 @@
 - **⚡ Hızlı**: Vite ile optimize edilmiş performans
 - **📱 Responsive**: Tüm cihazlarda mükemmel deneyim
 - **🎯 QR Generator**: Anında QR kod oluşturma ve indirme
-
-## 🛠️ Araçlar
-
-### 📱 QR Kod Oluşturucu
-- **Real-time Preview**: Anında QR kod önizlemesi
-- **Multiple Formats**: PNG, JPG, SVG indirme seçenekleri
-- **Customization**: Boyut, hata düzeltme seviyesi ayarları
-- **Smart Detection**: URL/Metin otomatik algılama
-- **Copy to Clipboard**: QR kod ve metin kopyalama
-
-## 🚀 Kurulum
-
-### Ön Koşullar
-- Node.js 16.0+
-- npm veya yarn
-
-### Adımlar
-
-1. **Repository'yi klonlayın**
-```bash
-git clone https://github.com/your-username/ibasely.git
-cd ibasely
-```
-
-2. **Dependencies yükleyin**
-```bash
-npm install
-```
-
-3. **Development server başlatın**
-```bash
-npm run dev
-```
-
-4. **Tarayıcıda açın**
-```
-http://localhost:3000
-```
-
-## 📦 Build & Deploy
-
-### Production Build
-```bash
-npm run build
-```
-
-### Preview Build
-```bash
-npm run preview
-```
-
-### PWA Test
-```bash
-npm run build
-npm run preview
-```
-Lighthouse ile PWA skorunuzu kontrol edin.
 
 ## 🎨 Teknoloji Stack'i
 
@@ -116,16 +58,6 @@ ibasely/
 └── README.md             # Documentation
 ```
 
-## 🎯 PWA Özellikleri
-
-### ✅ Tamamlanan
-- [x] Service Worker otomasyonu
-- [x] Web App Manifest
-- [x] Offline çalışabilirlik
-- [x] Install prompt
-- [x] Responsive design
-- [x] Modern browser desteği
-
 ### 📱 Desteklenen Platformlar
 - **Desktop**: Chrome, Firefox, Safari, Edge
 - **Mobile**: iOS Safari, Chrome Mobile, Samsung Internet
@@ -160,27 +92,6 @@ npm run lint     # ESLint check
 - **Prettier**: Kod formatlama (önerilen)
 - **Modern JS**: ES6+ features
 
-### Contributing
-1. Fork the project
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📈 Roadmap
-
-### v1.1 - Gelecek Özellikler
-- [ ] Renk Paleti Generator
-- [ ] Basit Resim Düzenleyici
-- [ ] QR kod renk özelleştirme
-- [ ] Batch QR generation
-
-### v1.2 - Advanced Features
-- [ ] QR kod analitikleri
-- [ ] Cloud sync (opsiyonel)
-- [ ] API entegrasyonu
-- [ ] Multi-language support
-
 ## 📄 Lisans
 
 Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
@@ -189,7 +100,7 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 **Hüseyin Karacif**
 - GitHub: [@huseyinkaracif](https://github.com/huseyinkaracif)
-- Email: huseyin@example.com
+- Email: hsynkrcf@gmail.com
 
 ## 🙏 Teşekkürler
 
