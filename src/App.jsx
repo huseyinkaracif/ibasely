@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Header from './components/Layout/Header'
 import TabNavigation from './components/Layout/TabNavigation'
 import QRGenerator from './components/QRGenerator/QRGenerator'
+import BatchQRGenerator from './components/QRGenerator/BatchQRGenerator'
 
 const tabs = [
   {
@@ -10,8 +11,13 @@ const tabs = [
     label: 'QR Oluştur',
     icon: '📱',
     component: QRGenerator
+  },
+  {
+    id: 'batch-qr-generator',
+    label: 'Toplu QR Oluştur',
+    icon: '📋',
+    component: BatchQRGenerator
   }
-  // Gelecek versiyonlar için daha fazla tab eklenebilir
 ]
 
 function App() {
