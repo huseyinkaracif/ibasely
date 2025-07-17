@@ -227,7 +227,7 @@ const QRGenerator = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="input-header">
-            <div className="input-type-indicator">
+            <div className="input-header-title">
               {inputType === 'url' ? <Link size={20} /> : <Type size={20} />}
               <span>{inputType === 'url' ? 'URL' : 'Metin'}</span>
             </div>
