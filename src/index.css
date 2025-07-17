@@ -282,4 +282,119 @@ body {
 /* App Animations */
 .app-fade-in {
   animation: fadeIn 0.8s ease-out;
+}
+
+/* Footer Styles */
+.app-footer {
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px 0;
+  margin-top: auto;
+  backdrop-filter: blur(10px);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.heart {
+  color: #ff6b6b;
+  animation: heartbeat 2s ease-in-out infinite;
+  font-size: 16px;
+}
+
+.developer-name {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.developer-name:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.2);
+}
+
+.footer-divider {
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 8px;
+  font-weight: 400;
+}
+
+.coffee-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.coffee-link:hover {
+  background: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255, 193, 7, 0.4);
+  color: rgba(255, 193, 7, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-footer {
+    padding: 20px 0;
+  }
+  
+  .footer-content {
+    font-size: 13px;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+  
+  .footer-divider {
+    margin: 0 4px;
+  }
+  
+  .coffee-link {
+    padding: 4px 10px;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .footer-divider {
+    display: none;
+  }
 } 

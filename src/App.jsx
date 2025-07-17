@@ -214,6 +214,33 @@ function App() {
           </AnimatePresence>
         </div>
       </main>
+      
+      <footer className="app-footer">
+        <div className="container">
+          <div className="footer-content">
+            <span>Made With </span>
+            <span className="heart">❤️</span>
+            <span> By </span>
+            <a 
+              href="https://www.linkedin.com/in/huseyin-karacif/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="developer-name"
+            >
+              Hüseyin Karacif
+            </a>
+            <span className="footer-divider">•</span>
+            <a 
+              href="https://buymeacoffee.com/hsynkrcf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="coffee-link"
+            >
+              ☕ Buy me a coffee
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
