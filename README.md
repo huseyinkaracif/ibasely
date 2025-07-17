@@ -11,9 +11,8 @@
 - **📱 PWA Desteği**: Offline çalışabilir, cihaza yüklenebilir
 - **⚡ Hızlı**: Vite ile optimize edilmiş performans
 - **📱 Responsive**: Tüm cihazlarda mükemmel deneyim
-- **🎯 QR Generator**: Anında QR kod oluşturma ve indirme
 
-## 🎨 Teknoloji Stack'i
+## 🎨 Teknoloji Stacklerim
 
 ### Core
 - **React 18**: Modern React with Hooks
