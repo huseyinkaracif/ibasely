@@ -7,6 +7,7 @@ import BackButton from './components/Layout/BackButton'
 import FavoritesSection from './components/Layout/FavoritesSection'
 import QRGenerator from './components/QRGenerator/QRGenerator'
 import BatchQRGenerator from './components/QRGenerator/BatchQRGenerator'
+import BackgroundRemover from './components/QRGenerator/BackgroundRemover'
 
 // Kategoriler ve araçlar
 const categories = [
@@ -53,6 +54,14 @@ const tools = {
       description: 'Birden fazla QR kod oluşturup ZIP dosyası olarak indirin',
       icon: '📋',
       component: BatchQRGenerator,
+      category: 'graphics'
+    },
+    {
+      id: 'background-remover',
+      title: 'Arka Plan Silici',
+      description: 'AI ile resimlerinizden arka planı otomatik olarak silin',
+      icon: '🎨',
+      component: BackgroundRemover,
       category: 'graphics'
     }
   ],

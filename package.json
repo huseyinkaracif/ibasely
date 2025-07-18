@@ -18,7 +18,9 @@
     "framer-motion": "^10.16.4",
     "react-hot-toast": "^2.4.1",
     "lucide-react": "^0.294.0",
-    "jszip": "^3.10.1"
+    "jszip": "^3.10.1",
+    "@tensorflow/tfjs": "^4.15.0",
+    "@mediapipe/selfie_segmentation": "^0.1.1675465747"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
