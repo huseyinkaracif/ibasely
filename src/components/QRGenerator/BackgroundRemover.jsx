@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Upload, Download, Trash2, Image as ImageIcon, AlertCircle, Loader2 } from 'lucide-react'
+import { Upload, Download, Trash2, Image as ImageIcon, Loader2 } from 'lucide-react'
 import { saveAs } from 'file-saver'
 import toast from 'react-hot-toast'
 import './BackgroundRemover.css'
@@ -9,17 +9,15 @@ const BackgroundRemover = () => {
   const [image, setImage] = useState(null)
   const [processedImage, setProcessedImage] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [modelLoaded, setModelLoaded] = useState(false)
-  const [loadingModel, setLoadingModel] = useState(false)
+  const [modelLoaded, setModelLoaded] = useState(true)
   const fileInputRef = useRef(null)
   const canvasRef = useRef(null)
   const selfieSegmentation = useRef(null)
 
-  // Model yükleme
-  const loadModel = async () => {
-    if (selfieSegmentation.current || loadingModel) return
+  // Model başlatma (lazy loading)
+  const initializeModel = async () => {
+    if (selfieSegmentation.current) return
     
-    setLoadingModel(true)
     try {
       const { SelfieSegmentation } = await import('@mediapipe/selfie_segmentation')
       
@@ -30,26 +28,21 @@ const BackgroundRemover = () => {
       })
 
       selfieSegmentation.current.setOptions({
-        modelSelection: 1, // 0 veya 1 (1 daha yüksek kalite)
+        modelSelection: 1,
         selfieMode: false,
       })
 
-      await new Promise((resolve) => {
-        selfieSegmentation.current.onResults((results) => {
-          if (results.segmentationMask) {
-            processSegmentation(results)
-          }
-        })
-        selfieSegmentation.current.initialize().then(resolve)
+      selfieSegmentation.current.onResults((results) => {
+        if (results.segmentationMask) {
+          processSegmentation(results)
+        }
       })
 
-      setModelLoaded(true)
-      toast.success('AI model yüklendi!')
+      await selfieSegmentation.current.initialize()
     } catch (error) {
-      console.error('Model yüklenirken hata:', error)
-      toast.error('Model yüklenemedi. Lütfen sayfayı yenileyin.')
-    } finally {
-      setLoadingModel(false)
+      console.error('Model başlatılamadı:', error)
+      toast.error('Model başlatılamadı. Lütfen tekrar deneyin.')
+      throw error
     }
   }
 
@@ -104,16 +97,17 @@ const BackgroundRemover = () => {
 
   // Arka plan silme işlemi
   const removeBackground = async () => {
-    if (!image || !modelLoaded) {
-      if (!modelLoaded) {
-        toast.error('Lütfen önce AI modelini yükleyin!')
-      }
+    if (!image) {
+      toast.error('Lütfen önce bir resim yükleyin!')
       return
     }
 
     setIsLoading(true)
     
     try {
+      // Model henüz başlatılmadıysa başlat
+      await initializeModel()
+      
       const img = new Image()
       img.onload = async () => {
         await selfieSegmentation.current.send({ image: img })
@@ -159,43 +153,9 @@ const BackgroundRemover = () => {
         <p>AI ile resimlerinizden arka planı otomatik olarak silin</p>
       </div>
 
-      {/* Model Yükleme */}
-      {!modelLoaded && (
-        <motion.div 
-          className="model-loading-section"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <div className="model-info">
-            <AlertCircle className="info-icon" />
-            <div>
-              <h3>AI Model Hazırlığı</h3>
-              <p>Arka plan silme için AI modelini yüklemek gerekiyor (~15MB)</p>
-            </div>
-          </div>
-          <button 
-            className="load-model-btn"
-            onClick={loadModel}
-            disabled={loadingModel}
-          >
-            {loadingModel ? (
-              <>
-                <Loader2 className="spin" />
-                Model Yükleniyor...
-              </>
-            ) : (
-              <>
-                <Download />
-                AI Modelini Yükle
-              </>
-            )}
-          </button>
-        </motion.div>
-      )}
-
       {/* Ana İçerik */}
       <AnimatePresence>
-        {modelLoaded && (
+        {true && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -317,7 +277,7 @@ const BackgroundRemover = () => {
         <ul>
           <li>En iyi sonuç için kişinin net bir şekilde göründüğü resimler kullanın</li>
           <li>Arka plan ile kişi arasında kontrast olması sonucu iyileştirir</li>
-          <li>Model ilk kez yüklendiğinde internet bağlantısı gerekir</li>
+          <li>AI model ile işlem yapar.</li>
           <li>İşlem tamamen tarayıcınızda yapılır, resimleriniz hiçbir sunucuya gönderilmez</li>
         </ul>
       </div>
