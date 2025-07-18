@@ -15,6 +15,11 @@
   gap: 2rem;
 }
 
+.header-content > a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .logo {
   display: flex;
   align-items: center;

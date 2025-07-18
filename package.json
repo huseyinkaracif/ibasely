@@ -20,7 +20,8 @@
     "lucide-react": "^0.294.0",
     "jszip": "^3.10.1",
     "@tensorflow/tfjs": "^4.15.0",
-    "@mediapipe/selfie_segmentation": "^0.1.1675465747"
+    "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+    "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

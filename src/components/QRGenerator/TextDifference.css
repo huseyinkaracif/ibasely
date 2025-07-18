@@ -13,10 +13,8 @@
 .difference-header h2 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #1f2937;
+  font-weight: 700;
 }
 
 .difference-header p {
@@ -165,7 +163,8 @@
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 0.875rem;
   line-height: 1.6;
-  background: #fafafa;
+  background: #ffffff;
+  color: #1f2937;
   min-height: 200px;
 }
 
@@ -686,6 +685,14 @@
   .text-difference {
     background: #111827;
     color: #f9fafb;
+  }
+  
+  .difference-header h2 {
+    color: #f9fafb;
+  }
+  
+  .difference-header p {
+    color: #d1d5db;
   }
   
   .controls-section,

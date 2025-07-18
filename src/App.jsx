@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Routes, Route } from 'react-router-dom'
+
+// Layout bileşenleri
 import Header from './components/Layout/Header'
-import CategoryNavigation from './components/Layout/CategoryNavigation'
-import ToolGrid from './components/Layout/ToolGrid'
-import BackButton from './components/Layout/BackButton'
-import FavoritesSection from './components/Layout/FavoritesSection'
+
+// Sayfa bileşenleri
+import HomePage from './pages/HomePage'
+import CategoryPage from './pages/CategoryPage'
+import ToolPage from './pages/ToolPage'
+import NotFoundPage from './pages/NotFoundPage'
+
+// Araç bileşenleri
 import QRGenerator from './components/QRGenerator/QRGenerator'
 import BatchQRGenerator from './components/QRGenerator/BatchQRGenerator'
 import BackgroundRemover from './components/QRGenerator/BackgroundRemover'
@@ -12,36 +17,35 @@ import TextAnalyzer from './components/QRGenerator/TextAnalyzer'
 import TextTransformer from './components/QRGenerator/TextTransformer'
 import TextDifference from './components/QRGenerator/TextDifference'
 
-// Kategoriler ve araçlar
-const categories = [
-  {
-    id: 'all',
-    label: 'Tüm araçlar',
-    icon: '🔧'
-  },
+// Kategoriler ve araçlar - global export
+export const categories = [
   {
     id: 'graphics',
     label: 'Grafik',
-    icon: '🎨'
+    icon: '🎨',
+    description: 'Görsel içerik oluşturma ve düzenleme araçları'
   },
   {
     id: 'text',
     label: 'Metin',
-    icon: '📝'
+    icon: '📝',
+    description: 'Metin analizi, dönüştürme ve karşılaştırma araçları'
   },
   {
     id: 'generators',
     label: 'Oluşturucular',
-    icon: '⚡'
+    icon: '⚡',
+    description: 'Çeşitli içerik oluşturucu araçları'
   },
   {
     id: 'formatters',
     label: 'Biçimlendiriciler',
-    icon: '🔄'
+    icon: '🔄',
+    description: 'Veri biçimlendirme ve dönüştürme araçları'
   }
 ]
 
-const tools = {
+export const tools = {
   graphics: [
     {
       id: 'qr-generator',
@@ -49,7 +53,8 @@ const tools = {
       description: 'URL ve metin için özelleştirilebilir QR kodlar oluşturun',
       icon: '📱',
       component: QRGenerator,
-      category: 'graphics'
+      category: 'graphics',
+      tags: ['qr', 'kod', 'generator', 'url', 'wifi']
     },
     {
       id: 'batch-qr-generator',
@@ -57,7 +62,8 @@ const tools = {
       description: 'Birden fazla QR kod oluşturup ZIP dosyası olarak indirin',
       icon: '📋',
       component: BatchQRGenerator,
-      category: 'graphics'
+      category: 'graphics',
+      tags: ['toplu', 'batch', 'qr', 'zip', 'çoklu']
     },
     {
       id: 'background-remover',
@@ -65,33 +71,37 @@ const tools = {
       description: 'AI ile resimlerinizden arka planı otomatik olarak silin',
       icon: '🎨',
       component: BackgroundRemover,
-      category: 'graphics'
+      category: 'graphics',
+      tags: ['ai', 'arka plan', 'silici', 'resim', 'background']
     }
   ],
   text: [
     {
       id: 'text-analyzer',
-      title: 'Gelişmiş Metin Analizcisi',
+      title: 'Metin Analizcisi',
       description: 'Detaylı metin analizi, kelime frekansı ve okunabilirlik raporu',
       icon: '📝',
       component: TextAnalyzer,
-      category: 'text'
+      category: 'text',
+      tags: ['analiz', 'metin', 'istatistik', 'kelime', 'okuma']
     },
     {
       id: 'text-transformer',
-      title: 'Gelişmiş Metin Dönüştürücü',
+      title: 'Metin Dönüştürücü',
       description: '20+ farklı format: camelCase, snake_case, Morse kodu ve daha fazlası',
       icon: '🔄',
       component: TextTransformer,
-      category: 'text'
+      category: 'text',
+      tags: ['dönüştürme', 'case', 'format', 'morse', 'leet']
     },
     {
       id: 'text-difference',
-      title: 'Gelişmiş Metin Farkı Analizcisi',
+      title: 'Metin Farkı Analizcisi',
       description: 'İki metin arasındaki farkları satır/kelime/karakter bazında analiz edin',
       icon: '📊',
       component: TextDifference,
-      category: 'text'
+      category: 'text',
+      tags: ['fark', 'diff', 'karşılaştırma', 'git', 'analiz']
     }
   ],
   generators: [],
@@ -99,159 +109,48 @@ const tools = {
 }
 
 // Tüm araçlar için birleştirilmiş liste
-const allTools = Object.values(tools).flat()
+export const allTools = Object.values(tools).flat()
+
+// Kategori adını al
+export const getCategoryName = (categoryId) => {
+  const category = categories.find(cat => cat.id === categoryId)
+  return category ? category.label : 'Bilinmeyen Kategori'
+}
+
+// Aracı ID ile bul
+export const getToolById = (toolId) => {
+  return allTools.find(tool => tool.id === toolId)
+}
+
+// Kategori araçlarını al
+export const getToolsByCategory = (categoryId) => {
+  return tools[categoryId] || []
+}
 
 function App() {
-  const [activeCategory, setActiveCategory] = useState(null) // null = ana kategoriler
-  const [activeTool, setActiveTool] = useState(null)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [favorites, setFavorites] = useState([])
-
-  // LocalStorage'dan favorileri yükle
-  useEffect(() => {
-    const savedFavorites = localStorage.getItem('ibasely-favorites')
-    if (savedFavorites) {
-      setFavorites(JSON.parse(savedFavorites))
-    }
-  }, [])
-
-  // Favorileri localStorage'a kaydet
-  const saveFavorites = (newFavorites) => {
-    setFavorites(newFavorites)
-    localStorage.setItem('ibasely-favorites', JSON.stringify(newFavorites))
-  }
-
-  const handleCategorySelect = (categoryId) => {
-    if (categoryId === 'all') {
-      setActiveCategory('all')
-    } else {
-      setActiveCategory(categoryId)
-    }
-    setActiveTool(null)
-    setSearchTerm('')
-  }
-
-  const handleToolSelect = (toolId) => {
-    setActiveTool(toolId)
-  }
-
-  const handleBack = () => {
-    if (activeTool) {
-      setActiveTool(null)
-    } else if (activeCategory) {
-      setActiveCategory(null)
-      setSearchTerm('')
-    }
-  }
-
-  const toggleFavorite = (toolId) => {
-    const newFavorites = favorites.includes(toolId)
-      ? favorites.filter(id => id !== toolId)
-      : [...favorites, toolId]
-    saveFavorites(newFavorites)
-  }
-
-  const isFavorite = (toolId) => {
-    return favorites.includes(toolId)
-  }
-
-  // Gösterilecek araçları belirle
-  const getDisplayTools = () => {
-    if (activeCategory === 'all') {
-      return allTools
-    } else if (activeCategory && tools[activeCategory]) {
-      return tools[activeCategory]
-    }
-    return []
-  }
-
-  // Arama filtrelemesi
-  const filteredTools = getDisplayTools().filter(tool =>
-    tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    tool.description.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-
-  // Favori araçları al
-  const getFavoriteTools = () => {
-    return allTools.filter(tool => favorites.includes(tool.id))
-  }
-
-  // Aktif araç component'ini bul
-  const activeToolData = allTools.find(tool => tool.id === activeTool)
-  const ActiveToolComponent = activeToolData?.component
-
   return (
     <div className="app">
+      {/* Header her sayfada gösterilir */}
       <Header />
       
+      {/* Main content area */}
       <main className="main-content">
-        <div className="container">
-          {/* Geri tuşu */}
-          {(activeCategory || activeTool) && (
-            <BackButton onClick={handleBack} />
-          )}
-
-          <AnimatePresence mode="wait">
-            {activeTool ? (
-              // Araç detay sayfası
-              <motion.div
-                key={`tool-${activeTool}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="tool-content"
-              >
-                {ActiveToolComponent && <ActiveToolComponent />}
-              </motion.div>
-            ) : activeCategory ? (
-              // Araç grid sayfası
-              <motion.div
-                key={`category-${activeCategory}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <ToolGrid
-                  category={categories.find(cat => cat.id === activeCategory)}
-                  tools={filteredTools}
-                  searchTerm={searchTerm}
-                  onSearchChange={setSearchTerm}
-                  onToolSelect={handleToolSelect}
-                  favorites={favorites}
-                  onToggleFavorite={toggleFavorite}
-                  isFavorite={isFavorite}
-                />
-              </motion.div>
-            ) : (
-              // Ana kategoriler sayfası
-              <motion.div
-                key="categories"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <CategoryNavigation
-                  categories={categories}
-                  onCategorySelect={handleCategorySelect}
-                />
-                
-                {favorites.length > 0 && (
-                  <FavoritesSection
-                    favoriteTools={getFavoriteTools()}
-                    onToolSelect={handleToolSelect}
-                    onToggleFavorite={toggleFavorite}
-                    isFavorite={isFavorite}
-                  />
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        <Routes>
+          {/* Ana sayfa */}
+          <Route path="/" element={<HomePage />} />
+          
+          {/* Kategori sayfaları */}
+          <Route path="/:category" element={<CategoryPage />} />
+          
+          {/* Araç sayfaları */}
+          <Route path="/:category/:toolId" element={<ToolPage />} />
+          
+          {/* 404 sayfa */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
       
+      {/* Footer */}
       <footer className="app-footer">
         <div className="container">
           <div className="footer-content">

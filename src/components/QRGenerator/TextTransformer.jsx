@@ -432,17 +432,6 @@ const TextTransformer = () => {
         </motion.div>
       )}
 
-      {/* Kullanım İpuçları */}
-      <div className="tips-section">
-        <h4>💡 İpuçları</h4>
-        <ul>
-          <li>Programlama için camelCase, snake_case, kebab-case kullanın</li>
-          <li>Tüm dönüşümleri tek seferde indirmek için "Tümünü İndir" butonunu kullanın</li>
-          <li>Eğlenceli formatlar sosyal medya için harika</li>
-          <li>Temizleme seçenekleri veri işleme için kullanışlı</li>
-          <li>Morse kodu ve Leet speak retro tarzı için mükemmel</li>
-        </ul>
-      </div>
     </motion.div>
   )
 }

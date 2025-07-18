@@ -273,10 +273,6 @@ const TextDifference = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="difference-header">
-        <h2>📊 Gelişmiş Metin Farkı Analizcisi</h2>
-        <p>İki metin arasındaki farkları detaylı bir şekilde analiz edin</p>
-      </div>
 
       {/* Kontroller */}
       <div className="controls-section">
@@ -510,48 +506,6 @@ const TextDifference = () => {
         )}
       </AnimatePresence>
 
-      {/* Boş durum */}
-      {!calculateDiff && (
-        <motion.div 
-          className="empty-state"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <GitCompare className="empty-icon" />
-          <h3>Metinleri Karşılaştırmaya Başlayın!</h3>
-          <p>Yukarıdaki alanlara eski ve yeni metinlerinizi girin</p>
-          <div className="feature-highlights">
-            <div className="feature">
-              <span className="feature-icon">📊</span>
-              <span>Detaylı istatistikler</span>
-            </div>
-            <div className="feature">
-              <span className="feature-icon">🔍</span>
-              <span>Satır/Kelime/Karakter analizi</span>
-            </div>
-            <div className="feature">
-              <span className="feature-icon">📥</span>
-              <span>Multiple export formatları</span>
-            </div>
-            <div className="feature">
-              <span className="feature-icon">👁️</span>
-              <span>Yan yana görünüm</span>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      {/* Kullanım İpuçları */}
-      <div className="tips-section">
-        <h4>💡 İpuçları</h4>
-        <ul>
-          <li>Satır modu: Kodlarda ve belgelerde büyük değişiklikler için ideal</li>
-          <li>Kelime modu: Metin düzenlemeleri ve içerik karşılaştırmaları için</li>
-          <li>Karakter modu: Hassas değişiklikler ve küçük düzeltmeler için</li>
-          <li>HTML export özelliği ile raporları web sayfası olarak paylaşabilirsiniz</li>
-          <li>JSON export ile programatik işlemler yapabilirsiniz</li>
-        </ul>
-      </div>
     </motion.div>
   )
 }

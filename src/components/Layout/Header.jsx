@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import './Header.css'
@@ -12,16 +13,18 @@ const Header = () => {
     >
       <div className="container">
         <div className="header-content">
-          <motion.div 
-            className="logo"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            <div className="logo-icon">
-              <Sparkles size={28} />
-            </div>
-            <h1 className="logo-text">IBASELY</h1>
-          </motion.div>
+          <Link to="/">
+            <motion.div 
+              className="logo"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <div className="logo-icon">
+                <Sparkles size={28} />
+              </div>
+              <h1 className="logo-text">IBASELY</h1>
+            </motion.div>
+          </Link>
           
           <div className="header-tagline">
             <p>Oyun Alanında İhtiyacınız Olan Her Şey</p>

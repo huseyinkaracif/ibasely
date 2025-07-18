@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Star, ExternalLink } from 'lucide-react'
 import './FavoritesSection.css'
 
-const FavoritesSection = ({ favoriteTools, onToolSelect, onToggleFavorite, isFavorite }) => {
+const FavoritesSection = ({ favoriteTools, onToggleFavorite, isFavorite }) => {
   return (
     <motion.div 
       className="favorites-section"
@@ -31,14 +32,15 @@ const FavoritesSection = ({ favoriteTools, onToolSelect, onToggleFavorite, isFav
               duration: 0.3, 
               delay: index * 0.1 + 0.7
             }}
-            onClick={() => onToolSelect(tool.id)}
           >
-            <div className="favorite-icon">
-              {tool.icon}
-            </div>
-            <div className="favorite-info">
-              <h3 className="favorite-title">{tool.title}</h3>
-            </div>
+            <Link to={`/${tool.category}/${tool.id}`} className="favorite-link">
+              <div className="favorite-icon">
+                {tool.icon}
+              </div>
+              <div className="favorite-info">
+                <h3 className="favorite-title">{tool.title}</h3>
+              </div>
+            </Link>
             <div className="favorite-actions">
               <button 
                 className="favorite-action-btn favorite-remove"
@@ -50,16 +52,15 @@ const FavoritesSection = ({ favoriteTools, onToolSelect, onToggleFavorite, isFav
               >
                 <Star size={16} fill="currentColor" />
               </button>
-              <button 
+              <Link 
+                to={`/${tool.category}/${tool.id}`}
+                target="_blank"
                 className="favorite-action-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(`#${tool.id}`, '_blank');
-                }}
                 title="Yeni Sekmede Aç"
+                onClick={(e) => e.stopPropagation()}
               >
                 <ExternalLink size={16} />
-              </button>
+              </Link>
             </div>
           </motion.div>
         ))}
