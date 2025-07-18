@@ -8,6 +8,8 @@ import FavoritesSection from './components/Layout/FavoritesSection'
 import QRGenerator from './components/QRGenerator/QRGenerator'
 import BatchQRGenerator from './components/QRGenerator/BatchQRGenerator'
 import BackgroundRemover from './components/QRGenerator/BackgroundRemover'
+import TextAnalyzer from './components/QRGenerator/TextAnalyzer'
+import TextTransformer from './components/QRGenerator/TextTransformer'
 
 // Kategoriler ve araçlar
 const categories = [
@@ -65,7 +67,24 @@ const tools = {
       category: 'graphics'
     }
   ],
-  text: [],
+  text: [
+    {
+      id: 'text-analyzer',
+      title: 'Gelişmiş Metin Analizcisi',
+      description: 'Detaylı metin analizi, kelime frekansı ve okunabilirlik raporu',
+      icon: '📝',
+      component: TextAnalyzer,
+      category: 'text'
+    },
+    {
+      id: 'text-transformer',
+      title: 'Gelişmiş Metin Dönüştürücü',
+      description: '20+ farklı format: camelCase, snake_case, Morse kodu ve daha fazlası',
+      icon: '🔄',
+      component: TextTransformer,
+      category: 'text'
+    }
+  ],
   generators: [],
   formatters: []
 }
