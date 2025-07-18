@@ -10,6 +10,7 @@ import BatchQRGenerator from './components/QRGenerator/BatchQRGenerator'
 import BackgroundRemover from './components/QRGenerator/BackgroundRemover'
 import TextAnalyzer from './components/QRGenerator/TextAnalyzer'
 import TextTransformer from './components/QRGenerator/TextTransformer'
+import TextDifference from './components/QRGenerator/TextDifference'
 
 // Kategoriler ve araçlar
 const categories = [
@@ -82,6 +83,14 @@ const tools = {
       description: '20+ farklı format: camelCase, snake_case, Morse kodu ve daha fazlası',
       icon: '🔄',
       component: TextTransformer,
+      category: 'text'
+    },
+    {
+      id: 'text-difference',
+      title: 'Gelişmiş Metin Farkı Analizcisi',
+      description: 'İki metin arasındaki farkları satır/kelime/karakter bazında analiz edin',
+      icon: '📊',
+      component: TextDifference,
       category: 'text'
     }
   ],
