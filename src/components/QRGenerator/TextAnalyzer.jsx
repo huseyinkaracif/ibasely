@@ -215,11 +215,6 @@ ${analysis.charAnalysis.charFrequency.map(([char, count]) => `• ${char}: ${cou
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="analyzer-header">
-        <h2>📝 Gelişmiş Metin Analizcisi</h2>
-        <p>Metninizi analiz edin ve detaylı istatistikler alın</p>
-      </div>
-
       <div className="analyzer-content">
         {/* Metin Giriş Alanı */}
         <div className="text-input-section">

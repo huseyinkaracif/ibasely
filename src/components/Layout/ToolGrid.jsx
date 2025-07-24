@@ -68,7 +68,7 @@ const ToolGrid = ({ category, tools, searchTerm, onSearchChange, onToolSelect, f
                 <h3 className="tool-title">{tool.title}</h3>
                 <p className="tool-description">{tool.description}</p>
               </div>
-              <div className="tool-actions">
+              <div className="tool-actions tool-actions-inside">
                 <button 
                   className={`tool-action-btn ${isFavorite(tool.id) ? 'favorite-active' : ''}`}
                   onClick={(e) => {
@@ -77,7 +77,17 @@ const ToolGrid = ({ category, tools, searchTerm, onSearchChange, onToolSelect, f
                   }}
                   title={isFavorite(tool.id) ? "Favorilerden Çıkar" : "Favorilere Ekle"}
                 >
-                  <Star size={18} fill={isFavorite(tool.id) ? "currentColor" : "none"} />
+                  <motion.span
+                    animate={{
+                      scale: isFavorite(tool.id) ? 1.2 : 1,
+                      color: isFavorite(tool.id) ? '#FFC107' : '#fff',
+                      transition: { type: 'spring', stiffness: 400, damping: 15 }
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                    style={{ display: 'inline-flex' }}
+                  >
+                    <Star size={18} fill={isFavorite(tool.id) ? "currentColor" : "none"} />
+                  </motion.span>
                 </button>
                 <button 
                   className="tool-action-btn"

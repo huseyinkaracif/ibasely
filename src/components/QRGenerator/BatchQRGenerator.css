@@ -2,6 +2,8 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  background: var(--bg-white);
+  color: var(--text-primary);
 }
 
 .batch-container {

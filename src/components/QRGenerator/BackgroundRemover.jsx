@@ -148,11 +148,6 @@ const BackgroundRemover = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="bg-remover-header">
-        <h2>🎨 Arka Plan Silici</h2>
-        <p>AI ile resimlerinizden arka planı otomatik olarak silin</p>
-      </div>
-
       {/* Ana İçerik */}
       <AnimatePresence>
         {true && (

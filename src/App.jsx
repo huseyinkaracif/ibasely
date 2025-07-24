@@ -127,9 +127,12 @@ export const getToolsByCategory = (categoryId) => {
   return tools[categoryId] || []
 }
 
+import { useTheme } from './theme/ThemeContext';
+
 function App() {
+  const { theme } = useTheme();
   return (
-    <div className="app">
+    <div className={`app theme-${theme}`}>
       {/* Header her sayfada gösterilir */}
       <Header />
       

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Sparkles } from 'lucide-react'
+import { Sparkles, Sun, Moon } from 'lucide-react'
 import './Header.css'
+import { useTheme } from '../../theme/ThemeContext';
 
 const Header = () => {
+  const { theme, toggleTheme } = useTheme();
   return (
     <motion.header 
       className="header"
@@ -25,9 +27,28 @@ const Header = () => {
               <h1 className="logo-text">IBASELY</h1>
             </motion.div>
           </Link>
-          
-          <div className="header-tagline">
-            <p>Oyun Alanında İhtiyacınız Olan Her Şey</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            <div className="header-tagline">
+              <p>Oyun Alanında İhtiyacınız Olan Her Şey</p>
+            </div>
+            <button
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label="Tema Değiştir"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                marginLeft: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: '1.5rem',
+                color: 'var(--text-primary)'
+              }}
+            >
+              {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+            </button>
           </div>
         </div>
       </div>

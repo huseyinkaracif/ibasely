@@ -282,11 +282,6 @@ const TextTransformer = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="transformer-header">
-        <h2>🔄 Gelişmiş Metin Dönüştürücü</h2>
-        <p>Metninizi 20+ farklı formata dönüştürün</p>
-      </div>
-
       {/* Metin Giriş Alanı */}
       <div className="input-section">
         <div className="input-header">
